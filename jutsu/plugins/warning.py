@@ -16,13 +16,14 @@ TRIGGERS = ('.', ',', '!', '$', '^', '&', '*', '(', ')', '~')
 async def block_(bot, message):
     chat_ = message.chat.id
     user_ = message.from_user.id
-    status = await userge.get_chat_user(chat_, user_)
+    status = await bot.get_chat_user(chat_, user_)
     is_admin = True if status == "administrator" else False
     is_creator = True if status == "creator" else False
     if is_admin or is_creator:
         return
+    user_men = (await bot.get_user(user_)).mention
     info = f"""
-**WARNING:**
+**WARNING to {user_men}**
 ```Bot won't work in this group.
 You have been cautioned, next time will be a real warn.```
 """
