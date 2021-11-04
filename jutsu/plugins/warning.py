@@ -17,8 +17,8 @@ async def block_(bot, message):
     chat_ = message.chat.id
     user_ = message.from_user.id
     status = await bot.get_chat_member(chat_, user_)
-    is_admin = True if status == "administrator" else False
-    is_creator = True if status == "creator" else False
+    is_admin = True if status.status== "administrator" else False
+    is_creator = True if status.status == "creator" else False
     if is_admin or is_creator:
         return
     user_men = (await bot.get_users(user_)).mention
