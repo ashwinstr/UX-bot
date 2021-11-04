@@ -27,4 +27,4 @@ async def block_(bot, message):
 ```Bot won't work in this group.
 You have been cautioned, next time will be a real warn.```
 """
-    await bot.send_message(message.chat.id, info)
+    await bot.send_message(message.chat.id, info, reply_to_message_id=message.message_id)
