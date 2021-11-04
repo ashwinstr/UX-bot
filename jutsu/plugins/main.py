@@ -10,13 +10,13 @@ from pyrogram.errors import MessageDeleteForbidden
 TRIGGERS = ('.', ',', '!', '$', '^', '&', '*', '(', ')', '~')
 
 @Client.on_message(
-    filters.regex(r"^."),
+    filters.regex(r"^[(\.|\,|\!|\$|\^|\&|\*|\(|\)|\~)]"),
     group=-1
 )
 async def block_(bot, message):
     info = f"""
 **WARNING:**
-Bot won't work in this group.
-You have been warned, next time will be a warn.
+```Bot won't work in this group.
+You have been cautioned, next time will be a real warn.```
 """
     await bot.send_message(message.chat.id, info)
