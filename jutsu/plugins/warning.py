@@ -23,7 +23,7 @@ async def block_(bot, message):
         return
     user_men = (await bot.get_users(user_)).mention
     info = f"""
-**WARNING to {user_men}**
+**WARNING** to **{user_men}**!!!
 ```Bot won't work in this group.
 You have been cautioned, next time will be a real warn.```
 """
