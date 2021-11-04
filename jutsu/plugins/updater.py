@@ -20,7 +20,7 @@ HEROKU_APP = (
 
 
 @Client.on_message(
-    filters.command(["update"], prefixes=";")
+    filters.command(["update"], prefixes=":")
     & filters.user([1013414037]),
     group=0
 )
