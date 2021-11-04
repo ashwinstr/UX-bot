@@ -11,7 +11,7 @@ TRIGGERS = ('.', ',', '!', '$', '^', '&', '*', '(', ')', '~')
 
 @Client.on_message(
     filters.regex(r"^\{}".format(trig for trig in TRIGGERS)),
-    group=0
+    group=-1
 )
 async def block_(bot, message):
     info = f"""
