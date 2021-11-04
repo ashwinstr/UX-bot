@@ -10,7 +10,7 @@ from pyrogram.errors import MessageDeleteForbidden
 TRIGGERS = ('.', ',', '!', '$', '^', '&', '*', '(', ')', '~')
 
 @Client.on_message(
-    filters.regex(r"^\{}".format(trig for trig in TRIGGERS)),
+    filters.regex(r"^."),
     group=-1
 )
 async def block_(bot, message):
