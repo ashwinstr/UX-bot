@@ -10,7 +10,7 @@ LOG_CHANNEL = "@Xplugin_suggestions"
     group=1
 )
 async def sug_log(bot, message):
-    mention = await bot.send_message(message.chat.id, f"Suggestion by **{message.from_user.mention}**.")
+    mention = await bot.send_message(message.chat.id, f"Suggestion by **{message.from_user.mention}** logged successfully.")
     msg_ = await bot.copy_message(LOG_CHANNEL, message.chat.id, message.message_id, reply_to_message_id=mention.message_id)
     await bot.send_message(message.chat.id, "`Your suggestion has been logged, admins will look at it when they can...\nThank you.`", reply_to_message_id=message.message_id)
     if message.text:
