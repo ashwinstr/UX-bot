@@ -26,7 +26,7 @@ async def sug_log(bot, message):
 @Client.on_message(
     filters.chat([-1001331162912])
     & filters.regex(pattern=r"^#bug"),
-    group=1
+    group=2
 )
 async def sug_log(bot, message):
     mention = await bot.send_message(message.chat.id, f"Bug report by **{message.from_user.mention}** logged successfully.")
