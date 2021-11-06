@@ -15,7 +15,7 @@ async def sug_log(bot, message):
     text_ = message.text
     text_ = text_.replace("#suggestion", "")
     if not text_:
-        await bot.send_message(message.chat.id, "`Suggestion message is empty, type suggestion tag and suggestion in same message.`)
+        await bot.send_message(message.chat.id, "`Suggestion message is empty, type suggestion tag and suggestion in same message.`")
         return
     mention = await bot.send_message(message.chat.id, f"Suggestion by **{message.from_user.mention}** logged successfully.")
     msg_ = await bot.copy_message(SUGGESTION_LOG, message.chat.id, message.message_id, reply_to_message_id=mention.message_id)
@@ -40,7 +40,7 @@ async def bug_log(bot, message):
     text_ = message.text
     text_ = text_.replace("#bug", "")
     if not text_:
-        await bot.send_message(message.chat.id, "`Bug report message is empty, type bug tag and bug report in same message.`)
+        await bot.send_message(message.chat.id, "`Bug report message is empty, type bug tag and bug report in same message.`")
         return
     mention = await bot.send_message(message.chat.id, f"Bug report by **{message.from_user.mention}** logged successfully.")
     msg_ = await bot.copy_message(BUG_LOG, message.chat.id, message.message_id, reply_to_message_id=mention.message_id)
