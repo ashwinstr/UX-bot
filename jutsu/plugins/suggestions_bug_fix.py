@@ -13,7 +13,7 @@ BUG_LOG = "@Xplugin_Bugs"
 async def sug_log(bot, message):
     mention = await bot.send_message(message.chat.id, f"Suggestion by **{message.from_user.mention}** logged successfully.")
     msg_ = await bot.copy_message(SUGGESTION_LOG, message.chat.id, message.message_id, reply_to_message_id=mention.message_id)
-    await bot.send_message(message.chat.id, "`Your suggestion has been logged, admins will look at it when they can...\nThank you.`", reply_to_message_id=message.message_id)
+#    await bot.send_message(message.chat.id, "`Your suggestion has been logged, admins will look at it when they can...\nThank you.`", reply_to_message_id=message.message_id)
     if message.text:
         text_ = message.text
         text_ += f"{text_}\n\n### PENDING ###"
@@ -29,7 +29,7 @@ async def sug_log(bot, message):
     & filters.regex(pattern=r"^#bug"),
     group=2
 )
-async def sug_log(bot, message):
+async def bug_log(bot, message):
     mention = await bot.send_message(message.chat.id, f"Bug report by **{message.from_user.mention}** logged successfully.")
     msg_ = await bot.copy_message(BUG_LOG, message.chat.id, message.message_id, reply_to_message_id=mention.message_id)
 #    await bot.send_message(message.chat.id, "`Your bug report has been logged, admins will look at it when they can...\nThank you.`", reply_to_message_id=message.message_id)
