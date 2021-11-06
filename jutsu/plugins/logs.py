@@ -5,7 +5,7 @@ from .updater import HEROKU_APP
 
 
 @Client.on_message(
-    filters.command(["logs"], prefixes=";")
+    filters.command(["logs"], prefixes="?")
     & filters.user([1013414037]),
     group=3
 )
