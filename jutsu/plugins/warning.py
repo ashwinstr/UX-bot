@@ -8,7 +8,8 @@ from pyrogram import Client, filters
 TRIGGERS = ('.', ',', '!', '$', '^', '&', '*', '(', ')', '~')
 
 @Client.on_message(
-    filters.regex(r"^[(\.|\,|\!|\$|\^|\&|\*|\(|\)|\~)]"),
+    filters.chat(["@Xplugin_support])
+    & filters.regex(r"^[(\.|\,|\!|\$|\^|\&|\*|\(|\)|\~)]"),
     group=-1
 )
 async def block_(bot, message):
