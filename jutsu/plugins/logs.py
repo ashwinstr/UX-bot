@@ -19,7 +19,7 @@ async def logging_(bot, message):
         logs = (HEROKU_APP.get_log)(lines=limit)
         if not os.path.isdir("logs"):
             os.mkdir("logs")
-        file_name = "logs/sedex-heroku.log"
+        file_name = "logs/jutsubot-heroku.log"
         with open(file_name, "w+") as file:
             file.write(logs)
             file.close()
@@ -27,6 +27,6 @@ async def logging_(bot, message):
         await bot.send_document(
             chat_id=message.chat.id,
             document=file_name,
-            caption=f"**Sedex-heroku.log** [ {limit} lines ]",
+            caption=f"**JutsuBot-heroku.log** [ {limit} lines ]",
         )
         os.remove(file_name)
