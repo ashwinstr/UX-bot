@@ -1,7 +1,7 @@
 from pyrogram import filters, Client
 
 
-LOG_CHANNEL = 
+LOG_CHANNEL = "@Xplugin_suggestions"
 
 
 @Client.on_message(
