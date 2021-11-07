@@ -9,7 +9,7 @@ TRIGGERS = ('.', ',', '!', '$', '^', '&', '*', '(', ')', '~')
 
 @Client.on_message(
     filters.chat(["@Xplugin_support"])
-    & filters.regex(r"^[(\.|\,|\!|\$|\^|\&|\*|\(|\)|\~)]"),
+    & filters.regex(r"^[(\.|\,|\!|\$|\^|\&|\*|\(|\)|\~)][a-zA-Z]"),
     group=-1
 )
 async def block_(bot, message):
