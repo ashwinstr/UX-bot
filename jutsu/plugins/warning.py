@@ -1,4 +1,4 @@
-# ported from KensurBot and modified by @Kakashi_HTK(TG)
+# made by @Kakashi_HTK(TG)
 
 
 import re
