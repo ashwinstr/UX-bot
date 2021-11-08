@@ -42,3 +42,27 @@ async def block_(bot, message):
 You have been cautioned, next time will be a real warn.```
 """
     await bot.send_message(message.chat.id, info, reply_to_message_id=message.message_id)
+
+
+@Client.on_message(
+    filters.command(["resetwarns"], prefixes="?"), group=3
+)
+async def reset_warns(bot, message):
+    reply_ = message.reply_to_message
+    if reply_:
+        user_ = reply_.from_user.id
+    else:
+        try:
+            user_ = (message.text).split(" ", 1)[1]
+        except:
+            return await bot.send_message(message.chat.id, "`Specify a user...`")
+    try:
+        user = await bot.get_users(user_)
+    except:
+        return await bot.send_message(message.chat.id, f"Provided user `{user_}` is not valid...")
+    found = await DATA.find_one({'user': user.id})
+    if found:
+        await DATA.update_one({'user': user.id}, {"$set": {'warnings': 0}}, upsert=True)
+        await bot.send_message(message.chat.id, f"The warnings for user **{user.first_name}** has been reset.")
+    else:
+        await bot.send_message(message.chat.id, f"User **{user.first_name}** has no warnings.")
