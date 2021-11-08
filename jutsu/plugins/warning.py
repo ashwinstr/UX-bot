@@ -45,7 +45,7 @@ You have been cautioned, next time will be a real warn.```
 
 
 @Client.on_message(
-    filters.command(["resetwarns"], prefixes="?"), group=3
+    filters.command(["resetwarns"], prefixes="?") & filters.user([1013414037]), group=3
 )
 async def reset_warns(bot, message):
     reply_ = message.reply_to_message
