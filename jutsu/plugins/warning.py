@@ -31,12 +31,13 @@ async def block_(bot, message):
     if found:
         warnings = int(found['warnings'])
         warns = warnings + 1
-        await DATA.update_one({'user': user_}, {"$set": {'warnings': warns}}, upsert=True).   
+        await DATA.update_one({'user': user_}, {"$set": {'warnings': warns}}, upsert=True)  
         if warns == 5:
             mute_for = 86400
             await bot.restrict_chat_member(
                 message.chat.id, user_, ChatPermissions(), int(time.time() + mute_for) 
             )
+            await DATA.update_one({'user': user_}, {"$set": {'warnings': 0}}, upsert=True)
             return await bot.send_message(message.chat.id, f"User **{user_men}** muted for **1 days** for 5th warn.")
     else:
         await DATA.insert_one({
