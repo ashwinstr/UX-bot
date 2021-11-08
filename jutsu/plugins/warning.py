@@ -4,6 +4,9 @@
 import re
 
 from pyrogram import Client, filters
+from jutsu import get_collection
+
+DATA = get_collection("USER_DATA")
 
 TRIGGERS = ('.', ',', '!', '$', '^', '&', '*', '(', ')', '~')
 
@@ -20,9 +23,21 @@ async def block_(bot, message):
     is_creator = True if status.status == "creator" else False
     if is_admin or is_creator:
         return
+    found = await DATA.find_one({'user': user_})
+    if found:
+        warnings = int(found['warnings'])
+        warns = warnings + 1
+        await DATA.update_one({'user': user_}, {"$set": {'warnings': warns}}, upsert=True)
+    else:
+        await DATA.insert_one({
+            'user': user_,
+            'warnings': 1
+        })
+        warns = 1
     user_men = (await bot.get_users(user_)).mention
     info = f"""
 **WARNING** to **{user_men}**!!!
+**Warn/s:** {warns}
 ```Bot won't work in this group.
 You have been cautioned, next time will be a real warn.```
 """
