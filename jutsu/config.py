@@ -1,3 +1,6 @@
+__all__ = ['Config']
+
+
 import os
 
 class Config:
