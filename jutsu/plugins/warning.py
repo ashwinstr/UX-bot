@@ -73,6 +73,6 @@ async def reset_warns(bot, message):
     found = await DATA.find_one({'user': user.id})
     if found:
         await DATA.update_one({'user': user.id}, {"$set": {'warnings': 0}}, upsert=True)
-        await bot.send_message(message.chat.id, f"The warnings for user **{user.first_name}** has been reset.")
+        await bot.send_message(message.chat.id, f"The warnings for user **{user.mention}** has been reset.")
     else:
-        await bot.send_message(message.chat.id, f"User **{user.first_name}** has no warnings.")
+        await bot.send_message(message.chat.id, f"User **{user.mention}** has no warnings.")
