@@ -4,7 +4,7 @@
 import re
 
 from pyrogram import Client, filters
-from jutsu.core import get_collection
+from jutsu.core.database import get_collection
 
 DATA = get_collection("USER_DATA")
 
