@@ -8,7 +8,7 @@ from typing import List
 from motor.motor_asyncio import AsyncIOMotorClient
 from motor.core import AgnosticClient, AgnosticDatabase, AgnosticCollection
 
-from jutsu import Config
+from jutsu.config import Config
 
 
 _MGCLIENT: AgnosticClient = AsyncIOMotorClient(Config.DB_URI)
