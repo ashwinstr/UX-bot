@@ -15,7 +15,7 @@ _MGCLIENT: AgnosticClient = AsyncIOMotorClient(Config.DB_URI)
 try:
     _RUN = asyncio.get_event_loop().run_until_complete
 except:
-    _RUN = asyncio.get_event_loop()
+    _RUN = asyncio.get_event()
 
 _DATABASE: AgnosticDatabase = _MGCLIENT["jutsu"]
 _COL_LIST: List[str] = _RUN(_DATABASE.list_collection_names())
