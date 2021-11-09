@@ -11,11 +11,11 @@ from jutsu.core.database import get_collection
 
 DATA = get_collection("USER_DATA")
 
-TRIGGERS = ('.', ',', '!', '$', '^', '&', '*', '(', ')', '~')
+TRIGGERS = ('.', ',', '!', '$', '^', '&', '(', ')', '~')
 
 @Client.on_message(
     filters.chat(["@Xplugin_support"])
-    & filters.regex(r"^[(\.|\,|\!|\$|\^|\&|\*|\(|\)|\~)][a-zA-Z]"),
+    & filters.regex(r"^[(\.|\,|\!|\$|\^|\&|\(|\)|\~)][a-zA-Z]"),
     group=-1
 )
 async def block_(bot, message):
