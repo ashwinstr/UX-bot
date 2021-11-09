@@ -46,7 +46,7 @@ async def block_(bot, message):
         })
         warns = 1
     info = f"""
-**WARNING** to **{user_men}**!!!
+**Warning** to **{user_men}**!!!
 **Warn/s:** {warns}
 ```Bot won't work in this group.
 You have been cautioned, 5th warn will be punishment.```
