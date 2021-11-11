@@ -67,7 +67,9 @@ async def list_admins(bot, message):
     msg = await bot.send_message(message.chat.id, "`Checking admin list...`")
     found = await ADMINS.find_one({'chat_id': message.chat.id})
     if found:
-        list_ = [found['admin_ids']]
+        list_ = found['admin_ids']
+        if isinstance(list_, int):
+            list_ = [list_]
         out_ = f"Admins of UX_JutsuBot in chat {message.chat.title}:\n\n"
         for mem in list_:
             user_ = await bot.get_users(mem)
