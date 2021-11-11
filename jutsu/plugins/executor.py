@@ -5,6 +5,7 @@ import keyword
 import traceback
 
 from pyrogram import Client, filters
+from jutsu import telegrapher
 
 
 @Client.on_message(
@@ -53,11 +54,13 @@ async def eval_(bot, message):
     output = ""
     if evaluation is not None:
         output += f"**>>** ```{evaluation}```"
-    if (exc or stderr) and message.chat.type in ("group", "supergroup", "channel"):
-        await msg.edit(output)
-    elif output:
-        await msg.edit(
-            text=output, parse_mode="md"
-        )
+    if output:
+        if len(output) > 4096:
+            link = telegrapher("EVAL from UX_JutsuBot.", output)
+            await msg.edit(f"Eval for the command given is **[HERE]({link})**.")
+        else:
+            await msg.edit(
+                text=output, parse_mode="md"
+            )
     else:
         await message.delete()
