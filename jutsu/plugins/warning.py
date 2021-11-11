@@ -10,16 +10,8 @@ from pyrogram.types import ChatPermissions
 from jutsu.core.database import get_collection
 
 DATA = get_collection("USER_DATA")
+ADMINS = get_collection("ADMINS")
 
-TRIGGERS = ('.', ',', '!', '$', '^', '&', '(', ')', '~')
-
-"""user_ = []
-
-async def _init():
-    global user_
-    async for mem in bot.iter_chat_members(message.chat.id):
-        if mem.user.status in ['administrator', 'creator']:
-            user_.append(mem.user.id)"""
 
 @Client.on_message(
     filters.chat(["@Xplugin_support"])
