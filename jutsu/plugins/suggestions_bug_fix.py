@@ -8,6 +8,7 @@ BUG_LOG = "@Xplugin_Bugs"
 @Client.on_message(
     filters.chat(["@xplugin_support"])
     & filters.regex(pattern=r"^#suggestion")
+    & filters.group
     & ~filters.bot,
     group=1
 )

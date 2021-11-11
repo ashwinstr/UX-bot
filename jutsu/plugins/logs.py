@@ -6,7 +6,8 @@ from .updater import HEROKU_APP
 
 @Client.on_message(
     filters.command(["logs"], prefixes="?")
-    & filters.user([1013414037]),
+    & filters.user([1013414037])
+    & filters.group,
     group=3
 )
 async def logging_(bot, message):

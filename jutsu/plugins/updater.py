@@ -21,7 +21,8 @@ HEROKU_APP = (
 
 @Client.on_message(
     filters.command(["update"], prefixes="?")
-    & filters.user([1013414037]),
+    & filters.user([1013414037])
+    & filters.group,
     group=0
 )
 async def updater_(bot, message):

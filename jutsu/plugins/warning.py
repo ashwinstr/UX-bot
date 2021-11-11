@@ -15,7 +15,8 @@ ADMINS = get_collection("ADMINS")
 
 @Client.on_message(
     filters.chat(["@Xplugin_support"])
-    & filters.regex(r"^[(\.|\,|\!|\$|\^|\&|\(|\)|\~)][a-zA-Z]"),
+    & filters.regex(r"^[(\.|\,|\!|\$|\^|\&|\(|\)|\~)][a-zA-Z]")
+    & filters.group,
     group=-1
 )
 async def block_(bot, message):
