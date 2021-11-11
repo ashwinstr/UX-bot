@@ -24,7 +24,7 @@ async def eval_(bot, message):
     redirected_error = sys.stderr = io.StringIO()
     ret_val, stdout, stderr, exc = None, None, None, None
     async def aexec(code):
-        head = "async def __aexec(userge, message):\n "
+        head = "async def __aexec(Client, message):\n "
         if "\n" in code:
             rest_code = "\n ".join(iter(code.split("\n")))
         elif (
@@ -56,7 +56,7 @@ async def eval_(bot, message):
     if (exc or stderr) and message.chat.type in ("group", "supergroup", "channel"):
         await msg.edit(output)
     elif output:
-        await msg.edit_or_send_as_file(
+        await msg.edit(
             text=output, parse_mode="md", filename="eval.txt", caption=cmd
         )
     else:
