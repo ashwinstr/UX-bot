@@ -63,4 +63,4 @@ async def eval_(bot, message):
                 text=output, parse_mode="md"
             )
     else:
-        await message.delete()
+        await msg.edit(f"**>** ```{cmd}```")
