@@ -56,7 +56,7 @@ async def block_(bot, message):
     info = f"""
 **Warning** to **{user_men}**!!!
 **Warn/s:** {warns}
-```Bot won't work in this group.
+```Bot won't work in this group. Go to Xplugin_OT.
 You have been cautioned, 5th warn will be punishment.```
 """
     await bot.send_message(message.chat.id, info, reply_to_message_id=message.message_id)
