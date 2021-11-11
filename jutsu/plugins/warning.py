@@ -7,7 +7,7 @@ import time
 from pyrogram import Client, filters
 from pyrogram.types import ChatPermissions
 
-from jutsu.core.database import get_collection
+from jutsu import get_collection
 
 DATA = get_collection("USER_DATA")
 ADMINS = get_collection("ADMINS")
