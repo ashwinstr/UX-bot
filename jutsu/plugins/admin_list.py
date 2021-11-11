@@ -8,7 +8,7 @@ ADMINS = get_collection("ADMINS")
 owner = None
 async def _init():
     global owner
-    owner = (Config.OWNER_ID).split()[0]
+    owner = str(Config.OWNER_ID).split()[0]
 
 
 @Client.on_message(
