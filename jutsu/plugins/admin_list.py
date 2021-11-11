@@ -55,7 +55,7 @@ async def rem_admin(bot, message):
 
                                    
 @Client.on_message(
-    filters.command(["adlist"], prefixes="?") & filters.user([Config.OWNER_ID]) & filters.group
+    filters.command(["adlist"], prefixes="?") & filters.user(Config.OWNER_ID) & filters.group
 )
 async def list_admins(bot, message):
     msg = await bot.send_message(message.chat.id, "`Checking admin list...`")
