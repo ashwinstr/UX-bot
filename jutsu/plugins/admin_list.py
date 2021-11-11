@@ -7,7 +7,7 @@ ADMINS = get_collection("ADMINS")
 
 
 @Client.on_message(
-    filters.command(["promote"], prefixes="?") & filters.user([Config.OWNER_ID]) & filters.group
+    filters.command(["promote"], prefixes="?") & filters.user([1013414037]) & filters.group
 )
 async def add_admin(bot, message):
     msg = await bot.send_message(message.chat.id, "`Processing...`")
