@@ -5,10 +5,7 @@ from jutsu import Config, get_collection
 
 ADMINS = get_collection("ADMINS")
 
-owner = None
-async def _init():
-    global owner
-    owner = str(Config.OWNER_ID).split()[0]
+owner = str(Config.OWNER_ID).split()[0]
 
 
 @Client.on_message(
