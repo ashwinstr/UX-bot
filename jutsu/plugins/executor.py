@@ -57,7 +57,7 @@ async def eval_(bot, message):
         await msg.edit(output)
     elif output:
         await msg.edit(
-            text=output, parse_mode="md", filename="eval.txt", caption=cmd
+            text=output, parse_mode="md"
         )
     else:
         await message.delete()
