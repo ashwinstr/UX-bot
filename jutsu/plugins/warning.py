@@ -15,7 +15,7 @@ TRIGGERS = ('.', ',', '!', '$', '^', '&', '(', ')', '~')
 
 user_ = []
 
-async def _init(bot, message):
+async def _init():
     global user_
     async for mem in bot.iter_chat_members(message.chat.id):
         if mem.user.status in ['administrator', 'creator']:
