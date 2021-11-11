@@ -20,7 +20,10 @@ async def add_admin(bot, message):
     chat_ = await bot.get_chat(message.chat.id)
     found = await ADMINS.find_one({"chat_id": chat_.id})
     if found:
-        if user_.id in [found['admin_ids']]:
+        list_ = found['admin_ids']
+        if isinstance(list_, int):
+            list_ = [list_]
+        if user_.id in list_:
             return await msg.edit(f"`User {user_.mention} is already admin for UX_JutsuBot in {chat_.title}...`")
         admins = []
         admins.append(found['admin_ids'])
