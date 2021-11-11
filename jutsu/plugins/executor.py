@@ -14,7 +14,7 @@ from pyrogram import Client, filters
 )
 async def eval_(bot, message):
     try:
-        cmd = ((message.text).strip).split(" ", 1)[1]
+        cmd = (message.text).split(" ", 1)[1]
     except:
         return await bot.send_message(message.chat.id, "`Command not found.`", reply_to_message_id=message.message_id)
     msg = await bot.send_message(message.chat.id, "`Executing eval...`", reply_to_message_id=message.message_id)
