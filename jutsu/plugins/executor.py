@@ -25,7 +25,7 @@ async def eval_(bot, message):
     redirected_error = sys.stderr = io.StringIO()
     ret_val, stdout, stderr, exc = None, None, None, None
     async def aexec(code):
-        head = "async def __aexec(Client, message):\n "
+        head = "async def __aexec(bot, message):\n "
         if "\n" in code:
             rest_code = "\n ".join(iter(code.split("\n")))
         elif (
@@ -40,7 +40,7 @@ async def eval_(bot, message):
         else:
             rest_code = f"\n return {code}"
         exec(head + rest_code)  # nosec pylint: disable=W0122
-        return await locals()["__aexec"](Client, message)
+        return await locals()["__aexec"](bot, message)
 
     try:
         ret_val = await aexec(cmd)
