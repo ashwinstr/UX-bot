@@ -27,6 +27,7 @@ async def add_admin(bot, message):
             return await msg.edit(f"`User {user_.mention} is already admin for UX_JutsuBot in {chat_.title}...`")
         admins = []
         admins.append(found['admin_ids'])
+        admins.append(user_.id)
         await ADMINS.update_one({'chat_id': chat_.id}, {'$set': {'admin_ids': admins}}, upsert=True)
     else:
         await ADMINS.insert_one({'chat_id': chat_.id, 'admin_ids': user_.id})
