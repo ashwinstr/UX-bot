@@ -13,13 +13,13 @@ DATA = get_collection("USER_DATA")
 
 TRIGGERS = ('.', ',', '!', '$', '^', '&', '(', ')', '~')
 
-user_ = []
+"""user_ = []
 
 async def _init():
     global user_
     async for mem in bot.iter_chat_members(message.chat.id):
         if mem.user.status in ['administrator', 'creator']:
-            user_.append(mem.user.id)
+            user_.append(mem.user.id)"""
 
 @Client.on_message(
     filters.chat(["@Xplugin_support"])
@@ -63,7 +63,7 @@ You have been cautioned, 5th warn will be punishment.```
 
 
 @Client.on_message(
-    filters.command(["resetwarns"], prefixes="?") & filters.user(user_), group=3
+    filters.command(["resetwarns"], prefixes="?") & filters.user([1013414037]), group=3
 )
 async def reset_warns(bot, message):
     reply_ = message.reply_to_message
