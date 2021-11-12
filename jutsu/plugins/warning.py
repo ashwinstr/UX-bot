@@ -12,19 +12,19 @@ from jutsu import get_collection, Config
 DATA = get_collection("USER_DATA")
 ADMINS = get_collection("ADMINS")
 
-admins = []
+admin = []
 """owner = int(str(Config.OWNER_ID).split()[0])
 admins.append(owner)"""
 
 async def _init():
-    global admins
+    global admin
     found = await ADMINS.find_one({'chat_id': -1001331162912})
     if found:
-        admins = found['admin_ids']
+        admin = found['admin_ids']
     owner = int(str(Config.OWNER_ID).split()[0])
-    admins.append(owner)
+    admin.append(owner)
 
-admins = admins
+admins = admin
 
 
 @Client.on_message(
