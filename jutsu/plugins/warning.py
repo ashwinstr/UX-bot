@@ -26,7 +26,8 @@ async def _init() -> None:
         list_ = found['admin_ids']
     owner = int(str(Config.OWNER_ID).split()[0])
     list_.append(owner)
-    Config.ADMINS = list_
+#    with open("cache/admin_list.txt", "w+") as adm_lst:
+#         adm_lst.write(list_)
 
 
 @Client.on_message(
@@ -93,3 +94,4 @@ async def reset_warns(bot, message):
         await bot.send_message(message.chat.id, f"The warnings for user **{user.mention}** has been reset.")
     else:
         await bot.send_message(message.chat.id, f"User **{user.mention}** has no warnings.")
+
