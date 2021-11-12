@@ -3,7 +3,6 @@
 from jutsu.core.database import get_collection
 from jutsu.config import Config
 from jutsu.helpers.tools import telegrapher
-import admin_list
 
 ADMINS = get_collection("ADMINS") 
 
