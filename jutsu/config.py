@@ -14,9 +14,6 @@ class Config:
     ADMINS = [] 
 
 class Admins:
-    async for data in ADMINS.find():
-        one = data['admin_ids']
-    admins = one
     with open("cache/admin_list.txt", "r") as list_:
         adm_lst = list_.read()
     _list = adm_lst.split()
