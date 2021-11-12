@@ -25,7 +25,7 @@ async def _init() -> None:
     owner = int(str(Config.OWNER_ID).split()[0])
     list_.append(owner)
     with open("cache/admin_list.txt", "w+") as adm_lst:
-        for one list_:
+        for one in list_:
             adm_lst.write(f"{one} ")
 
 
