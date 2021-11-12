@@ -13,21 +13,20 @@ from jutsu import get_collection, Config
 DATA = get_collection("USER_DATA")
 ADMINS = get_collection("ADMINS")
 
-"""owner = int(str(Config.OWNER_ID).split()[0])
-admins.append(owner)"""
+owner = int(str(Config.OWNER_ID).split()[0])
 
 async def _init() -> None:
-    if not os.path.exists("cache"):
-        os.mkdir("cache")
-    global list_
+    if not os.path.exists("cache/"):
+        os.mkdir("cache/")
     list_ = []
     found = await ADMINS.find_one({'chat_id': -1001331162912})
     if found:
         list_ = found['admin_ids']
     owner = int(str(Config.OWNER_ID).split()[0])
     list_.append(owner)
-#    with open("cache/admin_list.txt", "w+") as adm_lst:
-#         adm_lst.write(list_)
+    with open("cache/admin_list.txt", "w+") as adm_lst:
+        for one list_:
+            adm_lst.write(f"{one} ")
 
 
 @Client.on_message(
@@ -73,7 +72,7 @@ You have been cautioned, 5th warn will be punishment.```
 
 
 @Client.on_message(
-    filters.command(["resetwarns"], prefixes="?") & filters.user(Config.ADMINS), group=3
+    filters.command(["resetwarns"], prefixes="?") & (filters.user(load_adm()) | filters.user([owner])), group=3
 )
 async def reset_warns(bot, message):
     reply_ = message.reply_to_message
@@ -95,3 +94,8 @@ async def reset_warns(bot, message):
     else:
         await bot.send_message(message.chat.id, f"User **{user.mention}** has no warnings.")
 
+def load_adm():
+    with open("cache/admin_list.txt", "r") as list_:
+        adm_lst = list_.read()
+    _list = adm_lst.split()
+    return _list
