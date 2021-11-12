@@ -16,10 +16,12 @@ admins = []
 owner = int(str(Config.OWNER_ID).split()[0])
 
 async def _init():
+    global admins
+    global owner
     found = await ADMINS.find_one({'chat_id': -1001331162912})
     if found:
-        global admins
         admins = found['admin_ids']
+    admins.append(owner)
 
 
 @Client.on_message(
@@ -65,7 +67,7 @@ You have been cautioned, 5th warn will be punishment.```
 
 
 @Client.on_message(
-    filters.command(["resetwarns"], prefixes="?") & (filters.user(admins) | filters.user([owner])), group=3
+    filters.command(["resetwarns"], prefixes="?") & filters.user(admins), group=3
 )
 async def reset_warns(bot, message):
     reply_ = message.reply_to_message
