@@ -1,6 +1,7 @@
 
 import os
 
+import asyncio
 from pyrogram import Client, filters
 from jutsu import Config, get_collection
 
@@ -92,3 +93,4 @@ async def admin_cache(bot, message):
         for one in list_:
             admlist.write(f"{one} ")
     await msg.edit("`Admin cache refreshed.`")
+    asyncio.get_event_loop().create_task(bot.restart())
