@@ -5,11 +5,12 @@ from jutsu import Config, get_collection
 
 ADMINS = get_collection("ADMINS")
 
-owner = str(Config.OWNER_ID).split()[0]
+owner = int(str(Config.OWNER_ID).split()[0]) 
+
 
 
 @Client.on_message(
-    filters.command(["promote"], prefixes="?") & filters.user([1013414037]) & filters.group, group=2
+    filters.command(["promote"], prefixes="?") & filters.user([user]) & filters.group, group=2
 )
 async def add_admin(bot, message):
     msg = await bot.send_message(message.chat.id, "`Processing...`")
@@ -30,7 +31,7 @@ async def add_admin(bot, message):
 
     
 @Client.on_message(
-    filters.command(["demote"], prefixes="?") & filters.user() & filters.group, group=3
+    filters.command(["demote"], prefixes="?") & filters.user([owner]) & filters.group, group=3
 )
 async def rem_admin(bot, message):
     msg = await bot.send_message(message.chat.id, "`Processing...`")
@@ -56,7 +57,7 @@ async def rem_admin(bot, message):
 
                                    
 @Client.on_message(
-    filters.command(["adlist"], prefixes="?") & filters.user([int(owner)]) & filters.group, group=1
+    filters.command(["adlist"], prefixes="?") & filters.user([owner]) & filters.group, group=1
 )
 async def list_admins(bot, message):
     msg = await bot.send_message(message.chat.id, "`Checking admin list...`")
