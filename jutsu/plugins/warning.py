@@ -14,14 +14,13 @@ ADMINS = get_collection("ADMINS")
 
 admins = []
 owner = int(str(Config.OWNER_ID).split()[0])
+admins.append(owner)
 
 async def _init():
     global admins
-    global owner
     found = await ADMINS.find_one({'chat_id': -1001331162912})
     if found:
         admins = found['admin_ids']
-    admins.append(owner)
 
 
 @Client.on_message(
