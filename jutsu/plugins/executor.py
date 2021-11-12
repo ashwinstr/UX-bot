@@ -5,7 +5,7 @@ import keyword
 import traceback
 
 from pyrogram import Client, filters
-from jutsu import telegrapher
+from jutsu.helpers import telegrapher
 
 
 @Client.on_message(
