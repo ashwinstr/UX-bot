@@ -3,6 +3,7 @@
 
 import re
 import time
+import os
 
 from pyrogram import Client, filters
 from pyrogram.types import ChatPermissions
@@ -16,6 +17,8 @@ ADMINS = get_collection("ADMINS")
 admins.append(owner)"""
 
 async def _init() -> None:
+    if not os.path.exists("cache"):
+        os.mkdir("cache")
     global list_
     list_ = []
     found = await ADMINS.find_one({'chat_id': -1001331162912})
