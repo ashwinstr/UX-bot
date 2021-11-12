@@ -10,7 +10,7 @@ owner = int(str(Config.OWNER_ID).split()[0])
 
 
 @Client.on_message(
-    filters.command(["promote"], prefixes="?") & filters.user([user]) & filters.group, group=2
+    filters.command(["promote"], prefixes="?") & filters.user([owner]) & filters.group, group=2
 )
 async def add_admin(bot, message):
     msg = await bot.send_message(message.chat.id, "`Processing...`")
