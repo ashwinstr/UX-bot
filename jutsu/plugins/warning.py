@@ -8,34 +8,13 @@ import os
 from pyrogram import Client, filters
 from pyrogram.types import ChatPermissions
 
-from jutsu import get_collection, Config
-from jutsu.helpers import int_list
+from jutsu import get_collection, Config, load_adm
+
 
 DATA = get_collection("USER_DATA")
 ADMINS = get_collection("ADMINS")
 
 owner = int(str(Config.OWNER_ID).split()[0])
-
-async def _init() -> None:
-    if not os.path.exists("cache/"):
-        os.mkdir("cache/")
-    list_ = []
-    found = await ADMINS.find_one({'chat_id': -1001331162912})
-    if found:
-        list_ = found['admin_ids']
-    owner = int(str(Config.OWNER_ID).split()[0])
-    list_.append(owner)
-    with open("cache/admin_list.txt", "w+") as adm_lst:
-        for one in list_:
-            adm_lst.write(f"{one} ")
-
-
-def load_adm():
-    with open("cache/admin_list.txt", "r") as list_:
-        adm_lst = list_.read()
-    _list = adm_lst.split()
-    _list = int_list(_list)
-    return _list 
 
 
 @Client.on_message(
