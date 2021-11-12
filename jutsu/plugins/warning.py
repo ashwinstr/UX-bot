@@ -29,6 +29,13 @@ async def _init() -> None:
             adm_lst.write(f"{one} ")
 
 
+def load_adm():
+    with open("cache/admin_list.txt", "r") as list_:
+        adm_lst = list_.read()
+    _list = adm_lst.split()
+    return _list 
+
+
 @Client.on_message(
     filters.chat(["@Xplugin_support"])
     & filters.regex(r"^[(\.|\,|\!|\$|\^|\&|\(|\)|\~)][a-zA-Z]")
@@ -94,8 +101,3 @@ async def reset_warns(bot, message):
     else:
         await bot.send_message(message.chat.id, f"User **{user.mention}** has no warnings.")
 
-def load_adm():
-    with open("cache/admin_list.txt", "r") as list_:
-        adm_lst = list_.read()
-    _list = adm_lst.split()
-    return _list
