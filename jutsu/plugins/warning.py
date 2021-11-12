@@ -19,7 +19,7 @@ async def _init() -> None:
     list_ = []
     found = await ADMINS.find_one({'chat_id': -1001331162912})
     if found:
-        list_ = found['admin_ids']:
+        list_ = found['admin_ids']
     owner = int(str(Config.OWNER_ID).split()[0])
     list_.append(owner)
     setattr(Config, "ADMINS", list_)
