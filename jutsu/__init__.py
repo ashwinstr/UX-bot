@@ -3,10 +3,12 @@
 from jutsu.core.database import get_collection
 from jutsu.config import Config
 from jutsu.helpers.tools import telegrapher
-import _init
+import admin_list
+
+ADMINS = get_collection("ADMINS") 
 
 
-async def _init() -> None:
+async def admin_list():
     if not os.path.exists("cache/"):
         os.mkdir("cache/")
     list_ = []
