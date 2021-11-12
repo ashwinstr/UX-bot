@@ -23,9 +23,8 @@ async def _init():
         admins = found['admin_ids']
     owner = int(str(Config.OWNER_ID).split()[0])
     admins.append(owner)
-    setattr(Config, "ADMINS", admins)
 
-admins = Config.ADMINS
+admins = admins
 
 
 @Client.on_message(
