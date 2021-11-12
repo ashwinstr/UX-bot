@@ -15,16 +15,14 @@ ADMINS = get_collection("ADMINS")
 """owner = int(str(Config.OWNER_ID).split()[0])
 admins.append(owner)"""
 
-async def _init():
-    global admin
+async def _init() -> None:
+    list_ = []
     found = await ADMINS.find_one({'chat_id': -1001331162912})
     if found:
-        for one in found['admin_ids']:
-            Config.ADMINS.add(one)
+        list_ = found['admin_ids']:
     owner = int(str(Config.OWNER_ID).split()[0])
-    Config.ADMINS.add(owner)
-
-admins = Config.ADMINS
+    list_.append(owner)
+    setattr(Config, "ADMINS", list_)
 
 
 @Client.on_message(
