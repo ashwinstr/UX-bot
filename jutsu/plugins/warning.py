@@ -19,11 +19,12 @@ async def _init():
     global admin
     found = await ADMINS.find_one({'chat_id': -1001331162912})
     if found:
-        admin = found['admin_ids']
+        for one in found['admin_ids']:
+            Config.ADMINS.add(one)
     owner = int(str(Config.OWNER_ID).split()[0])
-    admin.append(owner)
+    Config.ADMINS.add(owner)
 
-admins = admin
+admins = Config.ADMINS
 
 
 @Client.on_message(
