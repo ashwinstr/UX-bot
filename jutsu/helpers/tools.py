@@ -12,3 +12,10 @@ def telegrapher(a_title: str, content: str) -> str:
     )
     link_ = resp["url"]
     return link_
+
+
+def int_list(list_):
+    intlist = []
+    for one in list_:
+        intlist.append(int(one))
+    return intlist
