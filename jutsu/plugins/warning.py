@@ -101,3 +101,22 @@ async def reset_warns(bot, message):
     else:
         await bot.send_message(message.chat.id, f"User **{user.mention}** has no warnings.")
 
+
+@Client.on_message(
+    filters.command(["admincache"], prefixes="?")
+    & filters.user([owner])
+    & filters.group,
+    group=4
+)
+async def admin_cache(bot, message):
+    msg = await bot.send_message(message.chat.id, "`Refreshing admin list...`", reply_to_message_id=message.message_id)
+    if not os.path.isdir("cache/"):
+        os.mkdir("cache/")
+    found = await ADMINS.find_one({'chat_id': -1001331162912})
+    if not found:
+        return await msg.edit("`List is empty.`")
+    list_ = found['admin_ids']
+    with open("cache/admin_list.txt", "w+") as admlist:
+        for one in list_:
+            admlist.write(f"{one} ")
+    await msg.edit("`Admin cache refreshed.`")
