@@ -23,8 +23,7 @@ async def _init() -> None:
         list_ = found['admin_ids']
     owner = int(str(Config.OWNER_ID).split()[0])
     list_.append(owner)
-
-Config.ADMINS = list_
+    Config.ADMINS = list_
 
 
 @Client.on_message(
