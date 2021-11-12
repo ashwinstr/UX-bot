@@ -12,7 +12,6 @@ from jutsu import get_collection, Config
 DATA = get_collection("USER_DATA")
 ADMINS = get_collection("ADMINS")
 
-admin = []
 """owner = int(str(Config.OWNER_ID).split()[0])
 admins.append(owner)"""
 
