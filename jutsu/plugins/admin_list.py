@@ -92,7 +92,7 @@ async def admin_cache(bot, message):
     list_ = found['admin_ids']
     async with aiofiles.open("cache/admin_list.txt", "w+") as fn:
         for one in list_:
-            one = (await bot.get_users(one)).username
+            one = (await bot.get_users(int(one))).username
             await fn.writelines(f"@{one} ")
     with open("cache/admin_list.txt", "r") as reading:
         read_ = reading.read()
