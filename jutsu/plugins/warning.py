@@ -9,7 +9,7 @@ from pyrogram import Client, filters
 from pyrogram.types import ChatPermissions
 
 from jutsu import get_collection, Config, Admins
-from jutsu.helpers import int_list
+from jutsu.helpers import int_list, username_list
 
 
 DATA = get_collection("USER_DATA")
@@ -22,7 +22,7 @@ def _admins_list_():
     with open("cache/admin_list.txt", "r") as list_:
         adm_lst = list_.read()
     adm_lst = adm_lst.split()
-    _list = int_list(adm_lst)
+    _list = username_list(adm_lst)
     return _list
 
 
