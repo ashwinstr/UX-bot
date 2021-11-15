@@ -19,3 +19,9 @@ def int_list(list_):
     for one in list_:
         intlist.append(int(one))
     return intlist
+
+async def username_list(list_):
+    u_list = []
+    for one in list_:
+        u_list.append((await bot.get_users(one)).username)
+    return u_list
