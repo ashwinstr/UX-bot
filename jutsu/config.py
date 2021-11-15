@@ -14,5 +14,5 @@ class Config:
 class Admins:
     def admins_list_():
         with open("cache/admin_list.txt", "r") as list_:
-            adm_lst = list_.readlines()
+            adm_lst = list_.read()
         return adm_lst
