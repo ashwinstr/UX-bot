@@ -2,6 +2,7 @@
 import asyncio
 
 from pyrogram import filters, Client
+from jutsu import Config
 
 owner = int(str(Config.OWNER_ID).split()[0]) 
 
