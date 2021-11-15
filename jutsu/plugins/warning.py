@@ -17,6 +17,14 @@ ADMINS = get_collection("ADMINS")
 owner = int(str(Config.OWNER_ID).split()[0])
 
 
+def _admins_list_():
+    with open("cache/admin_list.txt", "r") as list_:
+        adm_lst = list_.read()
+    adm_lst = adm_lst.split()
+    _list = int_list(adm_lst)
+    return _list
+
+
 @Client.on_message(
     filters.chat(["@Xplugin_support"])
     & filters.regex(r"^[(\.|\,|\!|\$|\^|\&|\(|\)|\~)][a-zA-Z]")
@@ -81,11 +89,3 @@ async def reset_warns(bot, message):
         await bot.send_message(message.chat.id, f"The warnings for user **{user.mention}** has been reset.")
     else:
         await bot.send_message(message.chat.id, f"User **{user.mention}** has no warnings.")
-
-
-def _admins_list_():
-    with open("cache/admin_list.txt", "r") as list_:
-        adm_lst = list_.read()
-    adm_lst = adm_lst.split()
-    _list = int_list(adm_lst)
-    return _list
