@@ -89,8 +89,8 @@ async def admin_cache(bot, message):
     if not found:
         return await msg.edit("`List is empty.`")
     list_ = found['admin_ids']
-    with open("cache/admin_list.txt", "w+") as admlist:
+    async with aiofiles.open("cache/admin_list.txt", "w+") as fn:
         for one in list_:
-            admlist.write(f"{one} ")
+            fn.write(f"{one} ")
     await msg.edit("`Admin cache refreshed.`")
-    asyncio.get_event_loop().create_task(bot.restart())
+#    asyncio.get_event_loop().create_task(bot.restart())
