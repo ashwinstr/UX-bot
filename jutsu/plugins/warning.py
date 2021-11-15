@@ -18,11 +18,11 @@ ADMINS = get_collection("ADMINS")
 owner = int(str(Config.OWNER_ID).split()[0])
 
 
-async def _admins_list_():
+def _admins_list_():
     with open("cache/admin_list.txt", "r") as list_:
         adm_lst = list_.read()
     adm_lst = adm_lst.split()
-    _list = await username_list(adm_lst)
+    _list = int_list(adm_lst)
     return _list
 
 
@@ -69,7 +69,7 @@ You have been cautioned, 5th warn will be punishment.```
 
 
 @Client.on_message(
-    filters.command(["resetwarns"], prefixes="?") & (filters.user([one async for one in _admins_list_()]) | filters.user([owner])), group=-2
+    filters.command(["resetwarns"], prefixes="?") & (filters.user([one for one in _admins_list_()]) | filters.user([owner])), group=-2
 )
 async def reset_warns(bot, message):
     reply_ = message.reply_to_message
