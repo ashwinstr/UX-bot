@@ -59,11 +59,11 @@ You have been cautioned, 5th warn will be punishment.```
     await bot.send_message(message.chat.id, info, reply_to_message_id=message.message_id)
 
 
-admins_list = Admins.admins_list_()
+admins_list = tuple(Admins.admins_list_())
 
 
 @Client.on_message(
-    filters.command(["resetwarns"], prefixes="?") & (filters.user() | filters.user([str(owner)])), group=3
+    filters.command(["resetwarns"], prefixes="?") & (filters.user([admins_list(0)] ) | filters.user([owner])), group=3
 )
 async def reset_warns(bot, message):
     reply_ = message.reply_to_message
