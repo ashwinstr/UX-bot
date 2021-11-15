@@ -63,7 +63,7 @@ admins_list = tuple(Admins.admins_list_())
 
 
 @Client.on_message(
-    filters.command(["resetwarns"], prefixes="?") & (filters.user([admins_list(0)] ) | filters.user([owner])), group=3
+    filters.command(["resetwarns"], prefixes="?") & (filters.user([admins_list[0]] ) | filters.user([owner])), group=3
 )
 async def reset_warns(bot, message):
     reply_ = message.reply_to_message
