@@ -60,7 +60,7 @@ You have been cautioned, 5th warn will be punishment.```
 
 
 @Client.on_message(
-    filters.command(["resetwarns"], prefixes="?") & (filters.user(Admins.adm_list) | filters.user([owner])), group=3
+    filters.command(["resetwarns"], prefixes="?") & (filters.user(Admins.admin_list_()) | filters.user([owner])), group=3
 )
 async def reset_warns(bot, message):
     reply_ = message.reply_to_message
