@@ -92,8 +92,11 @@ async def admin_cache(bot, message):
     list_ = found['admin_ids']
     async with aiofiles.open("cache/admin_list.txt", "w+") as fn:
         for one in list_:
-            one = (await bot.get_users(int(one))).username
-            await fn.writelines(f"@{one} ")
+            try:
+                one = (await bot.get_users(int(one))).username
+                await fn.writelines(f"@{one} ")
+            except:
+                pass
     with open("cache/admin_list.txt", "r") as reading:
         read_ = reading.read()
     await msg.edit(f"`Admin cache refreshed, users in the list are as below...`\n\n{read_}")
