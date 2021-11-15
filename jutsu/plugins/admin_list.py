@@ -94,7 +94,7 @@ async def admin_cache(bot, message):
         for one in list_:
             one = (await bot.get_users(one)).username
             await fn.writelines(f"@{one} ")
-    with open("cache/admin_list.txt, "r") as reading:
+    with open("cache/admin_list.txt", "r") as reading:
         read_ = reading.read()
     await msg.edit(f"`Admin cache refreshed, users in the list are as below...`\n\n{read_}")
     asyncio.get_event_loop().create_task(bot.restart())
