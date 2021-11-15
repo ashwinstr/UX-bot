@@ -15,4 +15,6 @@ class Admins:
     def admins_list_():
         with open("cache/admin_list.txt", "r") as list_:
             adm_lst = list_.read()
-        return adm_lst
+        adm_lst = adm_lst.split()
+        _list = int_list(adm_lst)
+        return _list
