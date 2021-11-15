@@ -6,7 +6,7 @@ from jutsu import get_collection
 ADMINS = get_collection("ADMINS")
 
 
-async def admin_cache():
+async def _init():
     if not os.path.isdir("cache/"):
         os.mkdir("cache/")
     found = await ADMINS.find_one({'chat_id': -1001331162912})
