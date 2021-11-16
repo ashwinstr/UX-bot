@@ -14,4 +14,4 @@ owner = int(str(Config.OWNER_ID).split()[0])
     group=7
 )
 async def test(bot, message):
-    await bot.send_message(message.chat.id, "Working", reply_to_message_id=message.message_id)
+    await message.reply("Working\n" + [one for one in _admins_list()])
