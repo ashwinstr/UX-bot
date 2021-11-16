@@ -94,10 +94,19 @@ async def admin_cache(bot, message):
         for one in list_:
             try:
                 one = (await bot.get_users(int(one))).id
-                await fn.writelines(f"{one} ")
+                await fn.writelines(f"{one}\n")
             except:
                 pass
     with open("cache/admin_list.txt", "r") as reading:
         read_ = reading.read()
-    await msg.edit(f"`Admin cache refreshed, users in the list are as below...`\n\n{read_}")
+    read_ = read_.split()
+    list_ = ""
+    for one in read_:
+        try:
+            u_n = (await bot.get_users(int(one))).username
+            u_n = f"- @{u_n}"
+        except:
+            u_n = ""
+        list_ += f"`{one}` {u_n}\n"
+    await msg.edit(f"`Admin cache refreshed, users in the list are as below...`\n\n{list_}")
     asyncio.get_event_loop().create_task(bot.restart())
