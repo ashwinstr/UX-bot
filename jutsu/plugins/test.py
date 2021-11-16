@@ -10,7 +10,7 @@ owner = int(str(Config.OWNER_ID).split()[0])
 @Client.on_message(
     filters.command(["testing"], prefixes="?")
     & filters.group
-    & filters.user([764626151, 1503856346, 1156425647]),
+    & filters.user([one for one in _admins_list_()]),
     group=7
 )
 async def test(_, message):
