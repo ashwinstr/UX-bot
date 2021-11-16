@@ -17,7 +17,9 @@ def telegrapher(a_title: str, content: str) -> str:
 def int_list(list_):
     intlist = []
     for one in list_:
-        intlist.append(int(one))
+        if one.isdigit():
+            one = int(one)
+        intlist.append(one)
     return intlist
 
 async def username_list(list_):
