@@ -95,7 +95,11 @@ async def list_admins(bot, message):
     group=4
 )
 async def admin_cache(bot, message):
-    if "-c" in (message.text).split(" ", 1)[1]:
+    try:
+        input_ = (message.text).split(" ", 1)[1]
+    except:
+        input_ = ""
+    if "-c" in input_:
         with open("cache/admin_list.txt", "r") as reading:
             read_ = reading.read()
         read_ = read_.split()
