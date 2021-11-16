@@ -13,5 +13,5 @@ owner = int(str(Config.OWNER_ID).split()[0])
     & filters.user([764626151, 1503856346, 1156425647]),
     group=7
 )
-async def test(bot, message):
+async def test(_, message):
     await message.reply("Working\n" + str([one for one in _admins_list_()]))
