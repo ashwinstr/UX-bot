@@ -8,8 +8,20 @@ from jutsu import Config, get_collection
 
 ADMINS = get_collection("ADMINS")
 
-owner = int(str(Config.OWNER_ID).split()[0]) 
+owner = int(str(Config.OWNER_ID).split()[0])
 
+
+async def _init():
+    async for one in ADMINS.find():
+        list_ = one['admin_ids']
+        break
+    async with aiofiles.open("cache/admin_list.txt", "w+") as fn:
+        for one in list_:
+            try:
+                one = (await bot.get_users(one)).id
+                await fn.writelines(f"{one}\n")      
+            except:
+                pass
 
 
 @Client.on_message(
@@ -83,6 +95,19 @@ async def list_admins(bot, message):
     group=4
 )
 async def admin_cache(bot, message):
+    if "-c" in (message.text).split(" ", 1)[1]:
+        with open("cache/admin_list.txt", "r") as reading:
+            read_ = reading.read()
+        read_ = read_.split()
+        list_ = ""
+        for one in read_:
+            try:
+                u_n = (await bot.get_users(int(one))).username
+                u_n = f"- @{u_n}"
+            except:
+                u_n = ""
+            list_ += f"`{one}` {u_n}\n"
+        return await message.reply(list_)
     msg = await bot.send_message(message.chat.id, "`Refreshing admin list...`", reply_to_message_id=message.message_id)
     if not os.path.isdir("cache/"):
         os.mkdir("cache/")
