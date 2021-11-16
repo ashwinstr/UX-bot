@@ -93,7 +93,7 @@ async def admin_cache(bot, message):
     async with aiofiles.open("cache/admin_list.txt", "w+") as fn:
         for one in list_:
             try:
-                one = (await bot.get_users(int(one))).username
+                one = (await bot.get_users(int(one))).id
                 await fn.writelines(f"{one} ")
             except:
                 pass
