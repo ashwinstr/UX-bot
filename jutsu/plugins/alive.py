@@ -16,7 +16,14 @@ async def _alive(bot, message):
 `See help for available commands.`
 **Thank you.**
 """
-
+    buttons_ = buttons()
+    await bot.send_animation(
+        message.chat.id,
+        "resources/rinnegan-nagato.gif",
+        caption=alive_msg,
+        reply_to_message_id=message.message_id,
+        reply_markup=buttons_,
+    )
 
 def buttons() -> InlineKeyboardMarkup:
     btn_ = [
