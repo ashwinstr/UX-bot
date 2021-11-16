@@ -13,6 +13,6 @@ owner = int(str(Config.OWNER_ID).split()[0])
     & filters.user([one for one in _admins_list_()]),
     group=7
 )
-async def test(_, message):
+async def test(bot, message):
     await message.reply("Working\n" + str([one for one in _admins_list_()]))
     await bot.send_message(message.chat.id, "test")
