@@ -94,7 +94,7 @@ async def admin_cache(bot, message):
         for one in list_:
             try:
                 one = (await bot.get_users(int(one))).username
-                await fn.writelines(f"@{one} ")
+                await fn.writelines(f"{one} ")
             except:
                 pass
     with open("cache/admin_list.txt", "r") as reading:
