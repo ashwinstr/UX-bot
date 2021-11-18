@@ -8,9 +8,10 @@ owner = int(str(Config.OWNER_ID).split()[0])
 
 
 
-@bot.on_message(
+@Client.on_filters(
     filters.command(["testing"], prefixes="?")
-    & filters.group,
+    & filters.group
+    & filters.user([one for one in _admins_list_()]),
     group=7
 )
 async def test(message):
