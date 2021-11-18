@@ -11,7 +11,7 @@ ADMINS = get_collection("ADMINS")
 owner = int(str(Config.OWNER_ID).split()[0])
 
 
-async def _init():
+async def _admins_list_load():
     async for one in ADMINS.find():
         list_ = one['admin_ids']
         break
