@@ -2,6 +2,7 @@
 import aiofiles
 import os
 from jutsu import get_collection
+import _init
 
 ADMINS = get_collection("ADMINS")
 
