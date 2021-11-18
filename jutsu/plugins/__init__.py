@@ -2,7 +2,7 @@
 import aiofiles
 import os
 from jutsu import get_collection
-from .admincache import _admins_list_load
+from .admin_list import _admins_list_load
 
 ADMINS = get_collection("ADMINS")
 
