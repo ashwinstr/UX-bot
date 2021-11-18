@@ -27,3 +27,11 @@ async def username_list(list_):
     for one in list_:
         u_list.append((await bot.get_users(one)).username)
     return u_list
+
+
+def _admins_list_():
+    with open("cache/admin_list.txt", "r") as list_:
+        adm_lst = list_.read()
+    adm_lst = adm_lst.split()
+    _list = int_list(adm_lst)
+    return _list
