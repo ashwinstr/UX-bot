@@ -18,6 +18,7 @@ ADMINS = get_collection("ADMINS")
 owner = int(str(Config.OWNER_ID).split()[0])
 
 
+admins = filters.create(_admins_list_)
 
 @Client.on_message(
     filters.chat(["@Xplugin_support"])
@@ -62,7 +63,7 @@ You have been cautioned, 5th warn will be punishment.```
 
 
 @Client.on_message(
-    filters.command(["resetwarns"], prefixes="?") & (filters.user([one for one in _admins_list_()]) | filters.user([owner])), group=-2
+    filters.command(["resetwarns"], prefixes="?") & (admins | filters.user([owner])), group=-2
 )
 async def reset_warns(bot, message):
     reply_ = message.reply_to_message
