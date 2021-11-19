@@ -9,5 +9,7 @@ async def Admins(_, __, message) -> bool:
         list_ = data['admin_ids']
         break
     if message.from_user.id in list_:
+        print("True")
         return True
+    print("False")
     return False
