@@ -5,9 +5,9 @@ from decouple import config
 
 
 
-APP_ID = config("APP_ID", default=None, cast=int)
-API_HASH = config("API_HASH", default=None)
-BOT_TOKEN = config("BOT_TOKEN", default=None)
+APP_ID = os.environ.get("APP_ID", default=None, cast=int)
+API_HASH = os.environ.get("API_HASH", default=None)
+BOT_TOKEN = os.environ.get("BOT_TOKEN", default=None)
 
 
 if __name__ == "__main__" :
