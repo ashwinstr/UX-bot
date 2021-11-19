@@ -7,11 +7,12 @@ from jutsu.plugins.warning import _admins_list_
 owner = int(str(Config.OWNER_ID).split()[0])
 
 
+admins = filters.create(_admins_list_)
 
 @app.on_message(
     filters.command(["testing"], prefixes="?")
     & filters.group
-    & filters.user([one for one in _admins_list_()]),
+    & (filters.user([owner]) | admins),
     group=7
 )
 async def test(bot, message):
