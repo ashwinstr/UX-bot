@@ -13,7 +13,8 @@ from jutsu.helpers import telegrapher
 @Client.on_message(
     filters.command(["eval"], prefixes="?")
     & filters.user([1013414037])
-    & filters.group
+    & filters.group,
+    group=8
 )
 async def eval_(bot, message):
     try:
