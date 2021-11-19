@@ -4,6 +4,8 @@ import io
 import keyword
 import traceback
 
+from getpass import getuser
+from os import geteuid
 from pyrogram import Client, filters
 from jutsu.helpers import telegrapher
 
