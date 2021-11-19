@@ -11,8 +11,8 @@ owner = int(str(Config.OWNER_ID).split()[0])
 admins_ = filters.create(Admins)
 
 @app.on_message(
-    filters.command(["testing"], prefixes="?"),
-    & filters.group,
+    filters.command(["testing"], prefixes="?")
+    & filters.group
     & admins_,
     group=7
 )
