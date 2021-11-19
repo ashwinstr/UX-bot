@@ -4,7 +4,7 @@ from jutsu import get_collection
 ADMINS = get_collection("ADMINS")
 
 
-async def Admins(message) -> bool:
+async def Admins(_, __, message) -> bool:
     async for data in ADMINS.find():
         list_ = data['admin_ids']
         break
