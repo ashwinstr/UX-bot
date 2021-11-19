@@ -8,7 +8,7 @@ owner = int(str(Config.OWNER_ID).split()[0])
 
 
 
-@Client.on_message(
+@app.on_message(
     filters.command(["testing"], prefixes="?")
     & filters.group
     & filters.user([one for one in _admins_list_()]),
