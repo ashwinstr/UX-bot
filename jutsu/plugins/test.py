@@ -10,7 +10,7 @@ owner = int(str(Config.OWNER_ID).split()[0])
 
 admins_ = filters.create(_admins_list_)
 
-@app.on_message(
+@Client.on_message(
     filters.command(["testing"], prefixes="?")
     & filters.group
     & (admins_ | filters.user([owner])),
