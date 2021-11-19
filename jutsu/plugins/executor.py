@@ -86,7 +86,7 @@ async def term_(bot, message):
         return
     msg_ = await bot.send_message(message.chat.id, "`Executing terminal ...`", reply_to_message_id=message.message_id)
     try:
-        t_obj = await Term.execute(cmd)  # type: Term
+        t_obj = await Term.execute(cmd: cmd)  # type: Term
     except Exception as t_e:  # pylint: disable=broad-except
         await msg_.edit(str(t_e))
         return
