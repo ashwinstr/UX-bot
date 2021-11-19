@@ -15,7 +15,7 @@ async def _admins_list_load():
     async for one in ADMINS.find():
         list_ = one['admin_ids']
         break
-    async with aiofiles.open("cache/admin_list.txt", "w+") as fn:
+    async with aiofiles.open("jutsu/cache/admin_list.txt", "w+") as fn:
         for one in list_:
             try:
                 one = (await bot.get_users(one)).id
@@ -119,14 +119,14 @@ async def admin_cache(bot, message):
     if not found:
         return await msg.edit("`List is empty.`")
     list_ = found['admin_ids']
-    async with aiofiles.open("cache/admin_list.txt", "w+") as fn:
+    async with aiofiles.open("jutsu/cache/admin_list.txt", "w+") as fn:
         for one in list_:
             try:
                 one = (await bot.get_users(int(one))).id
                 await fn.writelines(f"{one}\n")
             except:
                 pass
-    with open("cache/admin_list.txt", "r") as reading:
+    with open("jutsu/cache/admin_list.txt", "r") as reading:
         read_ = reading.read()
     read_ = read_.split()
     list_ = ""
