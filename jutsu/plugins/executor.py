@@ -3,6 +3,7 @@ import sys
 import io
 import keyword
 import traceback
+import asyncio
 
 from getpass import getuser
 from os import geteuid
