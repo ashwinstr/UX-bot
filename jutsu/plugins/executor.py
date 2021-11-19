@@ -160,11 +160,11 @@ class Term:
         await self._process.wait()
         self._finished = True
 
-    async def execute(cls, cmd: str) -> "Term":
+    async def execute(cmd: str) -> "Term":
         process = await asyncio.create_subprocess_shell(
             cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
         )
-        t_obj = cls(process)
+        t_obj = process
         asyncio.get_event_loop().create_task(t_obj.worker())
         return t_obj
 
