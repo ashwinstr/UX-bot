@@ -16,4 +16,4 @@ admins_ = filters.create(_admins_list_)
     group=7
 )
 async def test(bot, message):
-    await message.reply("Working\n" + str([one for one in _admins_list_()]))
+    await message.reply("Working\n" + str(admins_))
