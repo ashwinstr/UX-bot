@@ -13,7 +13,7 @@ admins_ = filters.create(_admins_list_)
 @app.on_message(
     filters.command(["testing"], prefixes="?")
     & filters.group
-    & (admins_ | filters.user([owner]),
+    & (admins_ | filters.user([owner])),
     group=7
 )
 async def test(bot, message):
