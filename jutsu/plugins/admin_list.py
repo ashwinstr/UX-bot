@@ -128,7 +128,8 @@ async def admin_cache(bot, message):
                 pass
     with open("jutsu/cache/admin_list.txt", "r") as reading:
         read_ = reading.read()
-    os.write("jutsu/cache/admin_list.txt", read_)
+    encode_ = str.encode(read_)
+    os.write("jutsu/cache/admin_list.txt", encode_)
     read_ = read_.split()
     list_ = ""
     for one in read_:
