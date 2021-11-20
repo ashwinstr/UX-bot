@@ -6,7 +6,7 @@ BUG_LOG = "@Xplugin_Bugs"
 
 
 @Client.on_message(
-    filters.chat(["@xplugin_support"])
+    filters.chat(["@ux_xplugin_support"])
     & filters.regex(pattern=r"^#suggestion")
     & filters.group
     & ~filters.bot,
@@ -32,7 +32,7 @@ async def sug_log(bot, message):
 
         
 @Client.on_message(
-    filters.chat(["@xplugin_support"])
+    filters.chat(["@ux_xplugin_support"])
     & filters.regex(pattern=r"^#bug")
     & filters.bot,
     group=2
