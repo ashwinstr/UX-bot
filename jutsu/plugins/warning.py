@@ -8,7 +8,7 @@ import os
 from pyrogram import Client, filters
 from pyrogram.types import ChatPermissions
 
-from jutsu import get_collection, Config, Admins
+from jutsu import get_collection, Config
 from jutsu.helpers import int_list, username_list, _admins_list_
 
 
