@@ -30,13 +30,3 @@ async def username_list(list_):
     for one in list_:
         u_list.append((await bot.get_users(one)).username)
     return u_list
-
-
-def _admins_list_(_, __, message) -> bool:
-    with open("jutsu/cache/admin_list.txt", "r") as list_:
-        adm_lst = list_.read()
-    adm_lst = adm_lst.split()
-    _list = int_list(adm_lst)
-    if message.from_user.id in _list:
-        return True
-    return False
