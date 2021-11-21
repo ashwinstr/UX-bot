@@ -2,7 +2,8 @@
 from pyrogram import filters, Client
 
 from jutsu import Config, app
-from jutsu.helpers import _admins_list_, admins
+from jutsu.helpers import _admins_list_
+from jutsu.plugins.Admins import admins
 
 owner = int(str(Config.OWNER_ID).split()[0])
 
