@@ -18,7 +18,7 @@ ADMINS = get_collection("ADMINS")
 owner = int(str(Config.OWNER_ID).split()[0])
 
 
-admins = filters.create(_admins_list_)
+admins = filters.create(admins)
 
 @Client.on_message(
     filters.chat(["@UX_xplugin_support"])
