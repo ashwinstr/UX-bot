@@ -43,7 +43,7 @@ def _admins_list_(_, __, message) -> bool:
 
 
 
-async def Admins(_, __, message) -> bool:
+async def Admin_list(_, __, message) -> bool:
     async for data in ADMINS.find():
         list_ = data['admin_ids']
         break
