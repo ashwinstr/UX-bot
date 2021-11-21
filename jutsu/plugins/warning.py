@@ -9,7 +9,7 @@ from pyrogram import Client, filters
 from pyrogram.types import ChatPermissions
 
 from jutsu import get_collection, Config
-from jutsu.helpers import int_list, username_list, _admins_list_
+from .Admins import admins
 
 
 DATA = get_collection("USER_DATA")
