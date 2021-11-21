@@ -1,8 +1,6 @@
 from telegraph import Telegraph
-from jutsu import get_collection
 
 
-ADMINS = get_collection("ADMINS")
 tele_ = Telegraph()
 
 def telegrapher(a_title: str, content: str) -> str:
@@ -41,12 +39,3 @@ def _admins_list_(_, __, message) -> bool:
         return True
     return False
 
-
-
-async def admins(_, __, message) -> bool:
-    async for data in ADMINS.find():
-        list_ = data['admin_ids']
-        break
-    if message.from_user.id in list_:
-        return True
-    return False 
