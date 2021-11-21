@@ -1,7 +1,7 @@
 
 from pyrogram import filters, Client
 
-from jutsu import Config, app
+from jutsu import Config
 from jutsu.helpers import _admins_list_
 from jutsu.plugins.Admins import admins
 
