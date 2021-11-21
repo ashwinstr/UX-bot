@@ -81,6 +81,7 @@ async def list_admins(bot, message):
         list_ = found['admin_ids']
         out_ = f"Admins of UX_JutsuBot in chat {message.chat.title}:\n\n"
         for mem in list_:
+            out_ += f"`{mem}` - "
             try:
                 user_ = await bot.get_users(int(mem))
                 out_ += f"{user_.mention}\n"
