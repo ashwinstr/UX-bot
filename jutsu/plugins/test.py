@@ -2,12 +2,12 @@
 from pyrogram import filters, Client
 
 from jutsu import Config, app
-from jutsu.helpers import _admins_list_
+from jutsu.helpers import _admins_list_, Admins
 
 owner = int(str(Config.OWNER_ID).split()[0])
 
 
-admins_ = filters.create(_admins_list_)
+admins_ = filters.create(Admins)
 
 @Client.on_message(
     filters.command(["testing"], prefixes="?")
