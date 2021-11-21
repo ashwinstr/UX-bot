@@ -81,8 +81,11 @@ async def list_admins(bot, message):
         list_ = found['admin_ids']
         out_ = f"Admins of UX_JutsuBot in chat {message.chat.title}:\n\n"
         for mem in list_:
-            user_ = await bot.get_users(int(mem))
-            out_ += f"{user_.mention}\n"
+            try:
+                user_ = await bot.get_users(int(mem))
+                out_ += f"{user_.mention}\n"
+            except:
+                out_ += "PeerIdInvalid\n"
         return await msg.edit(out_)
     else:
         await msg.edit("`There are no admins in this chat.`")
