@@ -25,7 +25,7 @@ if __name__ == "__main__" :
     plugins = dict(root="jutsu/plugins")
     app = pyrogram.Client(
 #        Client.export_session_string(),
-        "sharingan",
+        "UX_JutsuBot",
 #        STRING,
         bot_token=BOT_TOKEN,
         api_id=APP_ID,
