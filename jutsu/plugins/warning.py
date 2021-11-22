@@ -22,7 +22,7 @@ admins = filters.create(admins)
 
 @Client.on_message(
     filters.chat(["@UX_xplugin_support"])
-    & filters.regex(r"^[(\.|\,|\!|\$|\^|\&|\(|\)|\~)][a-zA-Z]")
+    & filters.regex(r"^[(\.|\,|\$|\^|\&|\(|\)|\~)][a-zA-Z]")
     & filters.group,
     group=-1
 )
