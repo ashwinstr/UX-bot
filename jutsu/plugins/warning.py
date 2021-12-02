@@ -63,11 +63,9 @@ You have been cautioned, 5th warn will be punishment.```
 
 
 @Client.on_callback_query(
-    filters.regex(r"remove_.*"),
-    group=0
+    filters.regex(r"remove_.*")
 )
 async def remove_warn(message, c_q: CallbackQuery):
-    await c_q.edit_message_text(c_q)
     found = await ADMINS.find_one({"chat_id": c_q.message.chat.id})
     if not found:
         return
