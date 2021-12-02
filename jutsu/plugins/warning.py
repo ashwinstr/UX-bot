@@ -74,12 +74,12 @@ async def remove_warn(bot, c_q: CallbackQuery):
         return
     await bot.send_message(-1001661347032, c_q.data)
     user_ = c_q.reply_to_message.from_user.id
-    if "one" in c_q.data:
+    if "one" in str(c_q.data):
         user_d = await DATA.find_one({"user": user_})
         warns = int(user_d['warnings']) - 1
         await DATA.update_one({'user': user_}, {"$set": {'warnings': warns}}, upsert=True)
         await c_q.edit_message_text(f"One warning removed, user currently has {warns} warns.")
-    elif "all" in c_q.data:
+    elif "all" in str(c_q.data):
         await DATA.update_one({'user': user_}, {"$set": {'warnings': 0}}, upsert=True)
         await c_q.edit_message_text("Warnings reset for the user.")
 
