@@ -55,10 +55,9 @@ async def eval_(bot, message):
     sys.stdout = old_stdout
     sys.stderr = old_stderr
     evaluation = exc or stderr or stdout or ret_val
-    output = ""
-    if evaluation is not None:
-        output += f"**>>** ```{evaluation}```"
-    if output:
+    output = f"**>** ```{cmd}```\n\n"
+    output += f"**>>** ```{evaluation}```" if evaluation else ""
+    if evaluation:
         if len(output) > 4096:
             link = telegrapher("EVAL from UX_JutsuBot.", output)
             await msg.edit(f"Eval for the command given is **[HERE]({link})**.")
@@ -66,6 +65,4 @@ async def eval_(bot, message):
             await msg.edit(
                 text=output, parse_mode="md"
             )
-    else:
-        await msg.edit(f"**>** ```{cmd}```")
 

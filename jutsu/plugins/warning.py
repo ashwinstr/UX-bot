@@ -15,8 +15,6 @@ from .Admins import admins
 DATA = get_collection("USER_DATA")
 ADMINS = get_collection("ADMINS")
 
-owner = int(str(Config.OWNER_ID).split()[0])
-
 
 admins = filters.create(admins)
 
@@ -77,18 +75,22 @@ async def remove_warn(bot, c_q: CallbackQuery):
         user_ = reply_.from_user.id
         if "one" in str(c_q.data):
             user_d = await DATA.find_one({"user": user_})
-            warns = int(user_d['warnings']) - 1
-            await DATA.update_one({'user': user_}, {"$set": {'warnings': warns}}, upsert=True)
-            await c_q.edit_message_text(f"One warning removed, user {reply_.from_user.mention} currently has {warns} warns.")
+            warns = int(user_d['warnings'])
+            if warns != 0:
+                warns -= 1
+                await DATA.update_one({'user': user_}, {"$set": {'warnings': warns}}, upsert=True)
+                await c_q.edit_message_text(f"One warning removed, user **{reply_.from_user.mention}** currently has {warns} warns.")
+            else:
+                await c_q.edit_message_text(f"User **{reply_.from_user.mention}** has no warnings.")
         elif "all" in str(c_q.data):
             await DATA.update_one({'user': user_}, {"$set": {'warnings': 0}}, upsert=True)
-            await c_q.edit_message_text(f"Warnings reset for {reply_.from_user.mention}.")
+            await c_q.edit_message_text(f"Warnings reset for **{reply_.from_user.mention}**.")
     except Exception as e:
         await bot.send_message(Config.LOG_CHANNEL, e)
 
 
 @Client.on_message(
-    filters.command(["resetwarns"], prefixes="?") & (admins | filters.user([owner])), group=-2
+    filters.command(["resetwarns"], prefixes="?") & (admins | filters.user(Config.OWNER_ID)), group=-2
 )
 async def reset_warns(bot, message):
     reply_ = message.reply_to_message
