@@ -66,22 +66,25 @@ You have been cautioned, 5th warn will be punishment.```
     filters.regex(r"remove_.*")
 )
 async def remove_warn(bot, c_q: CallbackQuery):
-    found = await ADMINS.find_one({"chat_id": c_q.message.chat.id})
-    if not found:
-        return
-    if c_q.from_user.id not in found['admin_ids'] and c_q.from_user.id != Config.OWNER_ID:
-        await c_q.answer("Only admins approved by Kakashi can do this.", show_alert=True)
-        return
-    await bot.send_message(-1001661347032, c_q.data)
-    user_ = c_q.reply_to_message.from_user.id
-    if "one" in str(c_q.data):
-        user_d = await DATA.find_one({"user": user_})
-        warns = int(user_d['warnings']) - 1
-        await DATA.update_one({'user': user_}, {"$set": {'warnings': warns}}, upsert=True)
-        await c_q.edit_message_text(f"One warning removed, user currently has {warns} warns.")
-    elif "all" in str(c_q.data):
-        await DATA.update_one({'user': user_}, {"$set": {'warnings': 0}}, upsert=True)
-        await c_q.edit_message_text("Warnings reset for the user.")
+    try:
+        found = await ADMINS.find_one({"chat_id": c_q.message.chat.id})
+        if not found:
+            return
+        if c_q.from_user.id not in found['admin_ids'] and c_q.from_user.id != Config.OWNER_ID:
+            await c_q.answer("Only admins approved by Kakashi can do this.", show_alert=True)
+            return
+        await bot.send_message(-1001661347032, c_q.data)
+        user_ = c_q.reply_to_message.from_user.id
+        if "one" in str(c_q.data):
+            user_d = await DATA.find_one({"user": user_})
+            warns = int(user_d['warnings']) - 1
+            await DATA.update_one({'user': user_}, {"$set": {'warnings': warns}}, upsert=True)
+            await c_q.edit_message_text(f"One warning removed, user currently has {warns} warns.")
+        elif "all" in str(c_q.data):
+            await DATA.update_one({'user': user_}, {"$set": {'warnings': 0}}, upsert=True)
+            await c_q.edit_message_text("Warnings reset for the user.")
+    except Exception as e:
+        await bot.send_message(Config.LOG_CHANNEL, e)
 
 
 @Client.on_message(
