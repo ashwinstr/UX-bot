@@ -63,8 +63,7 @@ You have been cautioned, 5th warn will be punishment.```
 
 
 @Client.on_callback_query(
-    filters.regex(r"remove_.*")
-    & filters.group,
+    filters.regex(r"remove_.*"),
     group=0
 )
 async def remove_warn(message, c_q: CallbackQuery):
