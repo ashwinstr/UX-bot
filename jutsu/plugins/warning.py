@@ -67,7 +67,7 @@ You have been cautioned, 5th warn will be punishment.```
     & filters.group,
     group=0
 )
-async def remove_warn(_, c_q: CallbackQuery):
+async def remove_warn(message, c_q: CallbackQuery):
     match_ = c_q.matches[1].group(0)
     found = await ADMINS.find_one({"chat_id": message.chat.id})
     if not found:
