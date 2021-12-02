@@ -74,7 +74,7 @@ async def remove_warn(bot, c_q: CallbackQuery):
             await c_q.answer("Only admins approved by Kakashi can do this.", show_alert=True)
             return
         await bot.send_message(-1001661347032, c_q.data)
-        user_ = c_q.reply_to_message.from_user.id
+        user_ = c_q.message.reply_to_message.from_user.id
         if "one" in str(c_q.data):
             user_d = await DATA.find_one({"user": user_})
             warns = int(user_d['warnings']) - 1
