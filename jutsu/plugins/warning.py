@@ -6,7 +6,7 @@ import time
 import os
 
 from pyrogram import Client, filters
-from pyrogram.types import ChatPermissions
+from pyrogram.types import ChatPermissions, CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
 
 from jutsu import get_collection, Config
 from .Admins import admins
@@ -46,7 +46,7 @@ async def block_(bot, message):
                 message.chat.id, user_, ChatPermissions(), int(time.time() + mute_for) 
             )
             await DATA.update_one({'user': user_}, {"$set": {'warnings': 0}}, upsert=True)
-            return await bot.send_message(message.chat.id, f"User **{user_men}** muted for **1 days** for 5th warn.")
+            return await bot.send_message(message.chat.id, f"User **{user_men}** muted for **1 day** for 5th warn.")
     else:
         await DATA.insert_one({
             'user': user_,
@@ -59,7 +59,31 @@ async def block_(bot, message):
 ```Bot won't work in this group. Go to Xplugin_OT.
 You have been cautioned, 5th warn will be punishment.```
 """
-    await bot.send_message(message.chat.id, info, reply_to_message_id=message.message_id)
+    await bot.send_message(message.chat.id, info, reply_to_message_id=message.message_id, reply_markup=buttons())
+
+
+@Client.on_callback_query(
+    filters.regex(r"remove_.*")
+    & filters.group,
+    group=0
+)
+async def remove_warn(_, c_q: CallbackQuery):
+    match_ = c_q.matches[1].group(0)
+    found = await ADMINS.find_one({"chat_id": c_q.chat.id})
+    if not found:
+        return
+    if c_q.from_user.id not in found['admin_ids']:
+        await c_q.answer("Only admins approved by Kakashi can do this.")
+        return
+    user_ = c_q.reply_to_message.from_user.id
+    if "one" in match_:
+        user_d = await DATA.find_one({"user": user_})
+        warns = int(user_d['warnings']) - 1
+        await DATA.update_one({'user': user_}, {"$set": {'warnings': warns}}, upsert=True)
+        await c_q.edit_message_text(f"One warning removed, user currently has {warns} warns.")
+    elif "all" in match_:
+        await DATA.update_one({'user': user_}, {"$set": {'warnings': 0}}, upsert=True)
+        await c_q.edit_message_text("Warnings reset for the user.")
 
 
 @Client.on_message(
@@ -84,3 +108,15 @@ async def reset_warns(bot, message):
         await bot.send_message(message.chat.id, f"The warnings for user **{user.mention}** has been reset.")
     else:
         await bot.send_message(message.chat.id, f"User **{user.mention}** has no warnings.")
+
+
+def buttons() -> InlineKeyboardMarkup:
+    btn_ = [
+        [
+            InlineKeyboardButton(text="Remove one warn.", callback_data="remove_one"),
+        ],
+        [
+            InlineKeyboardButton(text="Reset all warns.", callback_data="remove_all"),
+        ],
+    ]
+    return InlineKeyboardMarkup(btn_)
