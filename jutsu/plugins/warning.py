@@ -69,7 +69,7 @@ You have been cautioned, 5th warn will be punishment.```
 )
 async def remove_warn(_, c_q: CallbackQuery):
     match_ = c_q.matches[1].group(0)
-    found = await ADMINS.find_one({"chat_id": c_q.chat.id})
+    found = await ADMINS.find_one({"chat_id": message.chat.id})
     if not found:
         return
     if c_q.from_user.id not in found['admin_ids']:
