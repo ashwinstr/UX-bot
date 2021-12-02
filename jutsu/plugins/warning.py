@@ -65,14 +65,14 @@ You have been cautioned, 5th warn will be punishment.```
 @Client.on_callback_query(
     filters.regex(r"remove_.*")
 )
-async def remove_warn(message, c_q: CallbackQuery):
+async def remove_warn(bot, c_q: CallbackQuery):
     found = await ADMINS.find_one({"chat_id": c_q.message.chat.id})
     if not found:
         return
     if c_q.from_user.id not in found['admin_ids'] and c_q.from_user.id != Config.OWNER_ID:
         await c_q.answer("Only admins approved by Kakashi can do this.", show_alert=True)
         return
-    await c_q.send_message(-1001661347032, c_q.data)
+    await bot.send_message(-1001661347032, c_q.data)
     user_ = c_q.reply_to_message.from_user.id
     if "one" in c_q.data:
         user_d = await DATA.find_one({"user": user_})
