@@ -68,20 +68,19 @@ You have been cautioned, 5th warn will be punishment.```
     group=0
 )
 async def remove_warn(message, c_q: CallbackQuery):
-    match_ = c_q.matches[1].group(0)
-    found = await ADMINS.find_one({"chat_id": message.chat.id})
+    found = await ADMINS.find_one({"chat_id": c_q.message.chat.id})
     if not found:
         return
     if c_q.from_user.id not in found['admin_ids']:
         await c_q.answer("Only admins approved by Kakashi can do this.")
         return
-    user_ = c_q.reply_to_message.from_user.id
-    if "one" in match_:
+    user_ = c_q.message.reply_to_message.from_user.id
+    if "one" in c_q.data:
         user_d = await DATA.find_one({"user": user_})
         warns = int(user_d['warnings']) - 1
         await DATA.update_one({'user': user_}, {"$set": {'warnings': warns}}, upsert=True)
         await c_q.edit_message_text(f"One warning removed, user currently has {warns} warns.")
-    elif "all" in match_:
+    elif "all" in c_q.data:
         await DATA.update_one({'user': user_}, {"$set": {'warnings': 0}}, upsert=True)
         await c_q.edit_message_text("Warnings reset for the user.")
 
