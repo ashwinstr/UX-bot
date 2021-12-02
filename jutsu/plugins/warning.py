@@ -73,16 +73,16 @@ async def remove_warn(bot, c_q: CallbackQuery):
         if c_q.from_user.id not in found['admin_ids'] and c_q.from_user.id != Config.OWNER_ID:
             await c_q.answer("Only admins approved by Kakashi can do this.", show_alert=True)
             return
-        await bot.send_message(-1001661347032, c_q.data)
-        user_ = c_q.message.reply_to_message.from_user.id
+        reply_ = c_q.message.reply_to_message
+        user_ = reply_.from_user.id
         if "one" in str(c_q.data):
             user_d = await DATA.find_one({"user": user_})
             warns = int(user_d['warnings']) - 1
             await DATA.update_one({'user': user_}, {"$set": {'warnings': warns}}, upsert=True)
-            await c_q.edit_message_text(f"One warning removed, user currently has {warns} warns.")
+            await c_q.edit_message_text(f"One warning removed, user {reply_.from_user.mention} currently has {warns} warns.")
         elif "all" in str(c_q.data):
             await DATA.update_one({'user': user_}, {"$set": {'warnings': 0}}, upsert=True)
-            await c_q.edit_message_text("Warnings reset for the user.")
+            await c_q.edit_message_text(f"Warnings reset for {reply_.from_user.mention}.")
     except Exception as e:
         await bot.send_message(Config.LOG_CHANNEL, e)
 
