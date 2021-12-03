@@ -28,7 +28,7 @@ if __name__ == "__main__" :
     if session_string:
         string = session_string
     else:
-        string = "UX_JutsuBot"
+        string = ":memory:"
     app = pyrogram.Client(
         string,
         bot_token=BOT_TOKEN,
