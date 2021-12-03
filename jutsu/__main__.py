@@ -11,13 +11,13 @@ BOT_TOKEN = config("BOT_TOKEN", default=None)
 STRING = config("STRING_SESSION", default=None)
 
 
-app = Client(":memory:", api_hash=API_HASH, api_id=APP_ID, bot_token=BOT_TOKEN)
+jutsu = Client(":memory:", api_hash=API_HASH, api_id=APP_ID, bot_token=BOT_TOKEN)
 
-@app.on_message(
+@jutsu.on_message(
     filters.me & filters.command("start", prefixes="?")
 )
-async def session(app, message):
-    await message.reply(f"The session string is as below...\n\n`{str(app.export_session_string())}`\n\nUse it wisely.")
+async def session(jutsu, message):
+    await message.reply(f"The session string is as below...\n\n`{str(jutsu.export_session_string())}`\n\nUse it wisely.")
 
 
 session_string = ""
