@@ -1,9 +1,7 @@
 # made by @Kakashi_HTK(TG)
 
 
-import re
 import time
-import os
 
 from pyrogram import Client, filters
 from pyrogram.types import ChatPermissions, CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
