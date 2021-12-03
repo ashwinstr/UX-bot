@@ -1,7 +1,6 @@
 
-import os
 import pyrogram
-from pyrogram import Client
+from pyrogram import Client, filters
 from decouple import config
 
 
@@ -11,22 +10,27 @@ API_HASH = config("API_HASH", default=None)
 BOT_TOKEN = config("BOT_TOKEN", default=None)
 STRING = config("STRING_SESSION", default=None)
 
-async def genStrSession():  # pylint: disable=missing-function-docstring
-    async with Client(
-            "Jutsu",
-            api_id=APP_ID,
-            api_hash=API_HASH,
-    ) as jutsu:
-        string = await userge.export_session_string()
-    return string
+
+app = Client(":memory:", api_hash=API_HASH, api_id=APP_ID, bot_token=BOT_TOKEN)
+
+@app.on_message(
+    filters.me & filters.command("start", prefixes="?")
+)
+async def session(app, message):
+    await message.reply(f"The session string is as below...\n\n`{str(app.export_session_string())}`\n\nUse it wisely.")
+
+
+session_string = ""
 
 if __name__ == "__main__" :
     print("### Starting Bot... ###")
     plugins = dict(root="jutsu/plugins")
+    if session_string:
+        string = session_string
+    else:
+        string = "UX_JutsuBot"
     app = pyrogram.Client(
-#        Client.export_session_string(),
-        "UX_JutsuBot",
-#        STRING,
+        string,
         bot_token=BOT_TOKEN,
         api_id=APP_ID,
         api_hash=API_HASH,
