@@ -8,20 +8,7 @@ from jutsu import Config, get_collection
 
 ADMINS = get_collection("ADMINS")
 
-owner = int(str(Config.OWNER_ID).split()[0])
-
-
-async def _admins_list_load():
-    async for one in ADMINS.find():
-        list_ = one['admin_ids']
-        break
-    async with aiofiles.open("jutsu/cache/admin_list.txt", "w+") as fn:
-        for one in list_:
-            try:
-                one = (await bot.get_users(one)).id
-                await fn.writelines(f"{one}\n")      
-            except:
-                pass
+owner = int(Config.OWNER_ID)
 
 
 @Client.on_message(
@@ -86,61 +73,7 @@ async def list_admins(bot, message):
                 user_ = await bot.get_users(int(mem))
                 out_ += f"{user_.mention}\n"
             except:
-                out_ += "PeerIdInvalid\n"
+                out_ += f"{mem}\n"
         return await msg.edit(out_)
     else:
         await msg.edit("`There are no admins in this chat.`")
-
-
-@Client.on_message(
-    filters.command(["admincache"], prefixes="?")
-    & filters.user([owner])
-    & filters.group,
-    group=4
-)
-async def admin_cache(bot, message):
-    try:
-        input_ = (message.text).split(" ", 1)[1]
-    except:
-        input_ = ""
-    if "-c" in input_:
-        with open("cache/admin_list.txt", "r") as reading:
-            read_ = reading.read()
-        read_ = read_.split()
-        list_ = ""
-        for one in read_:
-            try:
-                u_n = (await bot.get_users(int(one))).username
-                u_n = f"- @{u_n}"
-            except:
-                u_n = ""
-            list_ += f"`{one}` {u_n}\n"
-        return await message.reply(list_)
-    msg = await bot.send_message(message.chat.id, "`Refreshing admin list...`", reply_to_message_id=message.message_id)
-    if not os.path.isdir("cache/"):
-        os.mkdir("cache/")
-    found = await ADMINS.find_one({'chat_id': -1001331162912})
-    if not found:
-        return await msg.edit("`List is empty.`")
-    list_ = found['admin_ids']
-    async with aiofiles.open("jutsu/cache/admin_list.txt", "w+") as fn:
-        for one in list_:
-            try:
-                one = (await bot.get_users(int(one))).id
-                await fn.writelines(f"{one}\n")
-            except:
-                pass
-    with open("jutsu/cache/admin_list.txt", "r") as reading:
-        read_ = reading.read()
-    path_ = "jutsu/cache/admin_list.txt"
-    read_ = read_.split()
-    list_ = ""
-    for one in read_:
-        try:
-            u_n = (await bot.get_users(int(one))).username
-            u_n = f"- @{u_n}"
-        except:
-            u_n = ""
-        list_ += f"`{one}` {u_n}\n"
-    await msg.edit(f"`Admin cache refreshed, users in the list are as below...`\n\n{list_}")
-    asyncio.get_event_loop().create_task(bot.restart())

@@ -2,8 +2,10 @@
 from pyrogram import filters, Client
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 
-from jutsu.plugins.warning import owner
+from jutsu import Config
 
+
+owner = int(Config.OWNER_ID)
 
 @Client.on_message(
     filters.command(["alive"], prefixes="?")
