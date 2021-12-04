@@ -30,7 +30,7 @@ async def _alive(bot, message):
 def buttons() -> InlineKeyboardMarkup:
     btn_ = [
         [
-            InlineKeyboardButton(text="Support group", url="t.me/xplugin_support"),
+            InlineKeyboardButton(text="Support group", url="t.me/UX_xplugin_support"),
             InlineKeyboardButton(text="OWNER", url="t.me/Kakashi_HTK"),
         ],
     ]
