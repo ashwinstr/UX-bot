@@ -1,5 +1,6 @@
 
 from pyrogram import filters, Client
+from pyrogram.types import Message
 
 from jutsu import Config
 from .Admins import admins
@@ -15,5 +16,5 @@ admins_ = filters.create(admins)
     & (admins_ | filters.user([owner])),
     group=7
 )
-async def test(bot, message):
-    await message.reply("Working\n" + str(admins_))
+async def test(bot, message: Message):
+    await message.reply("Working\n")
