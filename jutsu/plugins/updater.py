@@ -8,6 +8,8 @@ from pyrogram import Client, filters
 from git import Repo
 from git.exc import GitCommandError
 
+from jutsu import Config
+
 
 HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
 HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
@@ -27,7 +29,7 @@ HEROKU_APP = (
 )
 async def updater_(bot, message):
     if HEROKU_APP:
-        msg_ = await bot.send_message(
+        await bot.send_message(
             message.chat.id,
             "`Restarting the bot...\nIt will take upto 10 sec to update.`",
         )
@@ -36,3 +38,61 @@ async def updater_(bot, message):
     else:
         await bot.send_message(message.chat.id, "`Restarting [HARD] ...`")
         asyncio.get_event_loop().create_task(bot.restart(hard=True))
+
+
+@Client.on_message(
+    filters.command("restart", prefixes="?")
+    & filters.user([1013414037])
+    & filters.group,
+    group=1
+)
+async def updater_two(bot, message):
+    msg_ = await message.reply("`Checking for updates, please wait....`")
+    text_ = message.text
+    if " " in text_:
+        flag = text_.split(" ", 1)[1]
+    else:
+        flag = None
+    branch = "main"
+    repo = Repo()
+    try:
+        out = _get_updates(repo, branch)
+    except GitCommandError as g_e:
+        if "128" in str(g_e):
+            system(
+                f"git fetch {Config.UPSTREAM_REPO} {branch} && git checkout -f {branch}"
+            )
+            out = _get_updates(repo, branch)
+        else:
+            await msg_.edit(g_e)
+            return
+    if flag != "-pull":
+        if out:
+            change_log = (
+                f"**New UPDATE available for [{branch}]:\n\n📄 CHANGELOG 📄**\n\n"
+            )
+            await msg_.edit_or_send_as_file(
+                change_log + out, disable_web_page_preview=True
+            )
+        else:
+            await message.edit(f"**UX-bot is up-to-date with [{branch}]**")
+    else:
+        if out:
+            await msg_.edit(f"`New update found for [{branch}], Now pulling...`")
+            await _pull_from_repo(repo, branch)
+
+
+def _get_updates(repo: Repo, branch: str) -> str:
+    repo.remote(Config.UPSTREAM_REMOTE).fetch(branch)
+    upst = Config.UPSTREAM_REPO.rstrip("/")
+    out = ""
+    for i in repo.iter_commits(f"HEAD..{Config.UPSTREAM_REMOTE}/{branch}"):
+        out += f"🔨 **#{i.count()}** : [{i.summary}]({upst}/commit/{i}) 👷 __{i.author}__\n\n"
+    return out
+
+
+async def _pull_from_repo(repo: Repo, branch: str) -> None:
+    repo.git.checkout(branch, force=True)
+    repo.git.reset("--hard", branch)
+    repo.remote(Config.UPSTREAM_REMOTE).pull(branch, force=True)
+    await asyncio.sleep(1)
