@@ -89,6 +89,9 @@ async def updater_two(bot, message):
         if out:
             await msg_.edit(f"`New update found for [{branch}], Now pulling...`")
             await _pull_from_repo(repo, branch)
+            repo.remote("heroku").push(
+                refspec=f"{branch}:master", force=True
+            )
             await msg_.edit("**UX-jutsu updated successfully.**")
 
 
