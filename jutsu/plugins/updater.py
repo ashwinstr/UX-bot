@@ -1,4 +1,5 @@
 import heroku3
+import os
 from os import system
 import asyncio
 import time
