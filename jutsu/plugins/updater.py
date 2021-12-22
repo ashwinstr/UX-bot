@@ -23,7 +23,7 @@ HEROKU_APP = (
 
 
 @Client.on_message(
-    filters.command(["update"], prefixes="?")
+    filters.command(["restart"], prefixes="?")
     & filters.user([1013414037])
     & filters.group,
     group=0
@@ -42,7 +42,7 @@ async def updater_(bot, message):
 
 
 @Client.on_message(
-    filters.command("restart", prefixes="?")
+    filters.command("update", prefixes="?")
     & filters.user([1013414037])
     & filters.group,
     group=1
@@ -89,6 +89,7 @@ async def updater_two(bot, message):
         if out:
             await msg_.edit(f"`New update found for [{branch}], Now pulling...`")
             await _pull_from_repo(repo, branch)
+            await msg_.edit("**UX-jutsu updated successfully.**")
 
 
 def _get_updates(repo: Repo, branch: str) -> str:
