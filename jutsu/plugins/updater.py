@@ -56,6 +56,10 @@ async def updater_two(bot, message):
     branch = "main"
     repo = Repo()
     try:
+        os.system(f"git remote add upstream {Config.UPSTREAM_REPO}.git")
+    except Exception as e:
+        await bot.send_message(Config.LOG_CHANNEL, str(e))
+    try:
         out = _get_updates(repo, branch)
     except GitCommandError as g_e:
         if "128" in str(g_e):
