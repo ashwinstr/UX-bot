@@ -1,8 +1,8 @@
 import heroku3
-import os
 from os import system
 import asyncio
 import time
+import traceback
 
 from pyrogram import Client, filters
 from git import Repo
@@ -57,7 +57,7 @@ async def updater_two(bot, message):
     branch = "main"
     repo = Repo()
     try:
-        os.system(f"git remote add upstream {Config.UPSTREAM_REPO}.git")
+        system(f"git remote add upstream {Config.UPSTREAM_REPO}.git")
     except Exception as e:
         await bot.send_message(Config.LOG_CHANNEL, str(e))
     try:
@@ -71,6 +71,9 @@ async def updater_two(bot, message):
         else:
             await msg_.edit(g_e)
             return
+    except:
+        tb = traceback.format_exc()
+        await bot.send_message(Config.LOG_CHANNEL, f"```{tb}```")
     if flag != "-pull":
         if out:
             change_log = (
