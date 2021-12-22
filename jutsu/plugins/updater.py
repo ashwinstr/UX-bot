@@ -9,6 +9,7 @@ from git import Repo
 from git.exc import GitCommandError
 
 from jutsu import Config
+from jutsu.helpers import telegrapher
 
 
 HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
@@ -75,9 +76,13 @@ async def updater_two(bot, message):
             change_log = (
                 f"**New UPDATE available for [{branch}]:\n\n📄 CHANGELOG 📄**\n\n"
             )
-            await msg_.edit_or_send_as_file(
-                change_log + out, disable_web_page_preview=True
-            )
+            if len(change_log) <= 4096:
+                await msg_.edit(
+                    change_log + out, disable_web_page_preview=True
+                )
+            else:
+                link_ = telegrapher("UX-jutsu changelog.", change_log)
+                await msg_.edit(f"**UX-jutsu** changelog is [**HERE**]({link_}).")
         else:
             await msg_.edit(f"**UX-bot is up-to-date with [{branch}]**")
     else:
