@@ -79,7 +79,7 @@ async def updater_two(bot, message):
                 change_log + out, disable_web_page_preview=True
             )
         else:
-            await message.edit(f"**UX-bot is up-to-date with [{branch}]**")
+            await msg_.edit(f"**UX-bot is up-to-date with [{branch}]**")
     else:
         if out:
             await msg_.edit(f"`New update found for [{branch}], Now pulling...`")
